@@ -68,13 +68,13 @@ public class InBoundController {
         if (task == null){
             return "Invalid task id";
         }
-        taskService.complete(task.getId());
         LOGGER.info("Put Away Task completed: "+ task.getId());
+        taskService.complete(task.getId());
         List<Task> nextTask = taskService.createTaskQuery().processDefinitionKey("InBoundManagement").list();
         if (nextTask.isEmpty()){
             return "Task Completed for task id : " + task.getId();
         }
         LOGGER.info("Next Task: "+ nextTask.get(0).getName());
-        return "Task Completed for task id : " + task.getId() + "Next Task: "+ nextTask.get(0).getName() + "Id: " + nextTask.get(0).getId();
+        return "Task Completed for task id : " + task.getId() + " Next Task: "+ nextTask.get(0).getName() + "Id: " + nextTask.get(0).getId();
     }
 }
