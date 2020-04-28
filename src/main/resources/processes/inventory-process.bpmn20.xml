@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:activiti="http://activiti.org/bpmn" targetNamespace="Examples">
+<process id="inventoryProcess" name="inventoryProcess" isExecutable="true">
+        <startEvent id="theStart" />
+        <sequenceFlow sourceRef="theStart" targetRef="theTask" />
+
+        <userTask id="theTask" name="Add Product" >
+            <documentation>
+                Do the task - Add Product.
+                Add Product details with product name= ${productName} and id= ${productId}
+            </documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="theTask" targetRef="putaway" />
+
+        <userTask id="putaway" name="Put Away">
+            <documentation>
+                Do the task - Put Away.
+            </documentation>
+        </userTask>
+
+        <sequenceFlow sourceRef="putaway" targetRef="sendNotification" />
+
+        <serviceTask id="sendNotification" name="Send Notification" activiti:expression="${notificationService.sendNotification()}">
+            <documentation>
+                Do the task - Send Notification.
+            </documentation>
+        </serviceTask>
+
+        <sequenceFlow sourceRef="sendNotification" targetRef="theEnd" />
+
+        <endEvent id="theEnd" />
+    </process>
+</definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<bpmn:startEvent id="startEvent" name="startEvent">-->
+<!--</bpmn:startEvent>-->
+<!--<bpmn:sequenceFlow id="sequence-flow-1" sourceRef="startEvent" targetRef="A">-->
+<!--</bpmn:sequenceFlow>-->
+<!--<bpmn:userTask id="A" name="A" activiti:assignee="$INITIATOR">-->
+<!--</bpmn:userTask>-->
+<!--<bpmn:sequenceFlow id="sequence-flow-2" sourceRef="A" targetRef="endEvent">-->
+<!--</bpmn:sequenceFlow>-->
+<!--<bpmn:endEvent id="endEvent" name="endEvent">-->
+<!--</bpmn:endEvent>-->
+
+<!--<bpmn:userTask id="sid-42BAE58A-8FFB-4B02-AAED-E0D8EA5A7E39" name="Add Product details">-->
+<!--<bpmn:documentation>Add Product details with product name= ${productName} and id= ${productId}}</bpmn:documentation>-->
+<!--</bpmn:userTask>-->
+<!--<bpmn:exclusiveGateway id="sid-47ECD3C6-CA48-40D8-B478-6C26A122FA28"/>-->
+<!--<bpmn:sequenceFlow id="sid-B468226B-DB2E-421E-B04B-5FF1622F3E78" sourceRef="sid-42BAE58A-8FFB-4B02-AAED-E0D8EA5A7E39" targetRef="sid-47ECD3C6-CA48-40D8-B478-6C26A122FA28"/>-->
+<!--<bpmn:endEvent id="sid-A4859521-98BA-44EA-A9B1-55445823CE0D"/>-->
+<!--<bpmn:sequenceFlow id="sid-D536B119-9F6C-45B6-B1B6-8142AE70208A" sourceRef="sid-59C993BD-38A0-4DC3-97BC-F58FD94E38A9" targetRef="sid-A4859521-98BA-44EA-A9B1-55445823CE0D"/>-->
+<!--<bpmn:serviceTask id="sid-59C993BD-38A0-4DC3-97BC-F58FD94E38A9" name="Send rejection email" activiti:type="mail">-->
+<!--<extensionElements>-->
+<!--    <activiti:field name="to">-->
+<!--        <activiti:expression>${productName}</activiti:expression>-->
+<!--    </activiti:field>-->
+<!--    <activiti:field name="from">-->
+<!--        <activiti:expression>test@activiti.org</activiti:expression>-->
+<!--    </activiti:field>-->
+<!--    <activiti:field name="subject">-->
+<!--        <activiti:string><![CDATA[Your application has been rejected]]></activiti:string>-->
+<!--    </activiti:field>-->
+<!--    <activiti:field name="html">-->
+<!--    </activiti:field>-->
+<!--</extensionElements>-->
+<!--</bpmn:serviceTask>-->
+
+<!--        <?xml version="1.0" encoding="UTF-8"?>-->
+<!--<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0v7t65f" targetNamespace="http://bpmn.io/schema/bpmn">-->
+<!--<bpmn:process id="inventoryProcess" name="inventoryProcess" isExecutable="true">-->
+<!--    <bpmn:startEvent id="theStart" />-->
+<!--    <bpmn:sequenceFlow id="flow1" sourceRef="theStart" targetRef="theTask" />-->
+<!--    <bpmn:userTask id="theTask" name="my task" />-->
+<!--    <bpmn:sequenceFlow id="flow2" sourceRef="theTask" targetRef="theEnd" />-->
+<!--    <bpmn:endEvent id="theEnd" />-->
+<!--</bpmn:process>-->
+<!--</bpmn:definitions>-->
